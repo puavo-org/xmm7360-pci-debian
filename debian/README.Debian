@@ -1,0 +1,19 @@
+xmm7360-pci driver for Debian
+-----------------------------
+
+This package provides the DKMS source for the Intel XMM7360 LTE modem PCI
+driver.
+
+Loading the Module
+------------------
+
+In order to manually load the module, try:
+
+  sudo modprobe xmm7360_pci
+
+Once the package is installed, whether the module is loaded can be checked
+with the following command:
+
+  lsmod | grep xmm7360
+
+ -- Jarkko Sakkinen <jarkko.sakkinen@opinsys.com>  Wed, 21 May 2025

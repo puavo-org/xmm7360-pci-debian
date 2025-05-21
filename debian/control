@@ -1,0 +1,20 @@
+Source: xmm7360-pci
+Section: kernel
+Priority: optional
+Maintainer: Jarkko Sakkinen <jarkko.sakkinen@opinsys.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ dkms (>= 3.0.10),
+ git,
+ python3-configparse,
+ python3-pyroute2
+Standards-Version: 4.6.2
+Homepage: https://github.com/xmm7360/xmm7360-pci
+
+Package: xmm7360-pci
+Architecture: all
+Depends: ${misc:Depends}, dkms (>= 3.0.10)
+Description: Intel XMM7360 LTE modem PCI driver (DKMS)
+ This package provides the source code for the xmm7360-pci kernel module,
+ enabling support for the Intel XMM7360 LTE modem. The module will be
+ automatically rebuilt via the DKMS framework.

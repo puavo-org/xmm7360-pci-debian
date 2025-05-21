@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: xmm7360-pci
+Upstream-Contact: Frederic Bertolus <fred@qmsk.net>
+Source: https://github.com/xmm7360/xmm7360-pci
+
+Files: *
+Copyright: 2019 Frederic Bertolus <fred@qmsk.net>
+License: GPL-2
+
+Files: debian/*
+Copyright: 2025 Opinsys Oy
+License: GPL-2

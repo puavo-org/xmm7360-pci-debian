@@ -1,0 +1,36 @@
+From 1516e9657b8fc28db089cab871f0ce3a105e3b89 Mon Sep 17 00:00:00 2001
+From: Jarkko Sakkinen <jarkko.sakkinen@opinsys.com>
+Date: Tue, 20 May 2025 21:25:58 +0300
+Subject: [PATCH] xmm7360: Fix compilation for Linux v6.6.0
+
+Fix compilation for Linux v6.6.0 and later versions due the API change
+in the write() callback of struct tty_operations.
+
+Fixes: 95713967ba52 ("tty: make tty_operations::write()'s count size_t")
+Signed-off-by: Jarkko Sakkinen <jarkko.sakkinen@opinsys.com>
+---
+ xmm7360.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/xmm7360.c b/xmm7360.c
+index 1b5a90c..babeab8 100644
+--- a/xmm7360.c
++++ b/xmm7360.c
+@@ -1278,8 +1278,14 @@ static void xmm7360_tty_close(struct tty_struct *tty, struct file *filp)
+ 		tty_port_close(&qp->port, tty, filp);
+ }
+ 
++
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 6, 0)
++static ssize_t xmm7360_tty_write(struct tty_struct *tty,
++				 const unsigned char *buffer, size_t count)
++#else
+ static int xmm7360_tty_write(struct tty_struct *tty,
+ 			     const unsigned char *buffer, int count)
++#endif
+ {
+ 	struct queue_pair *qp = tty->driver_data;
+ 	int written;
+-- 
+2.39.5
+

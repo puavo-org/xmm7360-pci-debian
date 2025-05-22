@@ -8,9 +8,13 @@ COMMIT_ID := $(shell echo $(VERSION) | sed -e 's/^[0-9]*://' -e 's/-[^-]*$$//')
 %:
 	dh $@ --with dkms
 
+override_dh_install:
+	dh_install Makefile xmm7360.c debian/dkms.conf usr/src/xmm7360-pci-$(COMMIT_ID)
+	find "debian/xmm7360-pci/usr/src/xmm7360-pci-$(COMMIT_ID)" -type f -exec chmod 644 {} \;
+
 override_dh_auto_configure:
 	dh_auto_configure
-	sed "s/COMMIT_ID_VERSION/$(COMMIT_ID)/g" dkms.tmpl.conf > debian/dkms.conf
+	sed "s/COMMIT_ID_VERSION/$(COMMIT_ID)/g" debian/dkms.conf.in > debian/dkms.conf
 
 override_dh_auto_install:
 	@echo "Skip dh_auto_install, as dh_dkms_install will stage the source files."

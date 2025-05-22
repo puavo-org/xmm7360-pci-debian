@@ -15,6 +15,11 @@ if [ ! -d "$OUTPUT" ]; then
   usage
   exit 1
 fi
+OUTPUT=$(readlink -f "$OUTPUT")
+
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+ROOT_DIR=$(dirname "$(dirname "$SCRIPT_DIR")")
+cd "$ROOT_DIR"
 
 VERSION=$(dpkg-parsechangelog -SVersion | sed 's/-[0-9]*$//')
 COMMIT_ID=$(echo "$VERSION" | sed -n 's/.*\.//p')

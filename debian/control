@@ -6,7 +6,7 @@ Build-Depends:
  debhelper-compat (= 13),
  dkms (>= 3.0.10),
  git,
- python3-configparse,
+ python3-configargparse,
  python3-pyroute2
 Standards-Version: 4.6.2
 Homepage: https://github.com/xmm7360/xmm7360-pci
